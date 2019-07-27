@@ -20,7 +20,3 @@ CREATE TABLE wallet (
   "createdAt" timestamp with time zone,
   "updatedAt" timestamp with time zone 
 );
-
-
-INSERT INTO "user"(name,email, "registeredAt", "createdAt", "updatedAt") VALUES('Mukul', 'mukul@gmail.com',now(),now(),now());
-INSERT INTO wallet("user", bonus, deposit, winnings, "createdAt", "updatedAt") VALUES(1, 60, 100, 340 , now(), now());

@@ -12,7 +12,6 @@ module.exports = {
     winnings: {
       type: 'number'
     }
-
   }
 
 };
