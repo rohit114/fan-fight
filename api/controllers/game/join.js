@@ -3,7 +3,7 @@ module.exports = {
   description: `Joins a game and process wallet transections for the given user`,
   inputs: {
     user: {
-      description: `User's name`,
+      description: `User's ID`,
       type: `number`,
       required: true
     },
