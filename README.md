@@ -42,7 +42,7 @@ For LINUX https://www.digitalocean.com/community/tutorials/how-to-install-and-us
     9. Voilla! PostgreSQL setup done with all data from fanfight-dump.sql
 
 ### 3 To run the Sails App
-  Run command on terminal:
+    Run command on terminal:
     NODE_PATH=. NODE_ENV=development sails lift
-  Your sails app is running in localhost at port 1337
+    Your sails app is running in localhost at port 1337
 
