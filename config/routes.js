@@ -20,7 +20,7 @@ module.exports.routes = {
   ***************************************************************************/
 
   '/': { view: 'pages/homepage' },
-  'post /game/join': {action: 'game/join'},
+  'post /contest/join': {action: 'contest/join'},
 
 
   /***************************************************************************

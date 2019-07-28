@@ -37,7 +37,8 @@ module.exports = {
   fn: async function (inputs, exits) {
     try {
       const user = await User.findOne({ id: inputs.user }); //find user object
-      const wallet = await Wallet.findOne({ id: user.id }); //find wallet object of user
+
+      const wallet = await Wallet.findOne({ user: user.id }); //find wallet object of user
 
       const discountAmount = ((inputs.discount)/100)*inputs.entryFee;
       var payableAmount = inputs.entryFee - discountAmount;
@@ -73,7 +74,7 @@ module.exports = {
       payableAmount = txnMetaData.payableAmount;
       const remainingDepositAmount = txnMetaData.remainingDepositAmount;
       if( payableAmount === 0){
-        updatedWallet = await Wallet.updateOne({ user: inputs.user }).set({ deposit: remainingDepositAmount }); //updating wallet of user
+        updatedWallet = await Wallet.updateOne({ user: inputs.user }).set({ deposit: remainingDepositAmount , bonus: remainingBounsAmount}); //updating wallet of user
         
         return exits.success({
           success: true,
@@ -89,10 +90,6 @@ module.exports = {
       /********** TXN FROM WALLET'S WINNINGS BUCKET STARTS **********/
       txnMetaData = await WinningsBucketWalletTxn( payableAmount, wallet, exits);
       const remainingWinningsAmount = txnMetaData.remainingWinningsAmount;
-
-      console.log("remaining Bouns Amount", remainingBounsAmount);
-      console.log("remaining Deposit Amount", remainingDepositAmount);
-      console.log("remaining Winnings Amount", remainingWinningsAmount);
 
       updatedWallet = await Wallet.updateOne({ user: inputs.user }).set({
         bonus: remainingBounsAmount,
@@ -120,6 +117,7 @@ module.exports = {
 async function BonusBucketWalletTxn(payableAmount, wallet, exits){
 
   try {
+
     var remainingBounsAmount = 0;
     const usableBonusAmount = (0.1)*payableAmount;  //only 20% is usable from bonus bucket
     if( wallet.bonus >= usableBonusAmount){
@@ -129,7 +127,7 @@ async function BonusBucketWalletTxn(payableAmount, wallet, exits){
       payableAmount -= wallet.bonus;
       remainingBounsAmount = 0;
     }
-  
+
     return { payableAmount: payableAmount, remainingBounsAmount: remainingBounsAmount };
 
   } catch(err){
@@ -161,7 +159,6 @@ async function DepositBucketWalletTxn(payableAmount, wallet, exits){
 async function WinningsBucketWalletTxn(payableAmount, wallet, exits){
   try {
     var remainingWinningsAmount = 0;
-
     if( wallet.winnings >= payableAmount ){
       remainingWinningsAmount = wallet.winnings - payableAmount;
       payableAmount = 0;
