@@ -131,14 +131,11 @@ COPY public."user" (id, name, "imageUrl", phone, email, "registeredAt", "created
 --
 
 COPY public.wallet (id, "user", bonus, deposit, winnings, "createdAt", "updatedAt") FROM stdin;
-4	1	28	0	152	\N	\N
-5	2	0	0	160	\N	\N
-6	1	60	100	340	\N	\N
-7	2	60	100	340	\N	\N
-8	3	60	400	340	\N	\N
-9	4	60	400	340	\N	\N
-10	5	100	10	500	\N	\N
-11	6	100	200	400	\N	\N
+13	1	60	100	340	\N	\N
+14	2	60	400	340	\N	\N
+15	3	20	100	500	\N	\N
+16	4	100	100	100	\N	\N
+17	5	100	50	600	\N	\N
 \.
 
 
@@ -153,7 +150,7 @@ SELECT pg_catalog.setval('public.user_id_seq', 6, true);
 -- Name: wallet_id_seq; Type: SEQUENCE SET; Schema: public; Owner: fanfight
 --
 
-SELECT pg_catalog.setval('public.wallet_id_seq', 11, true);
+SELECT pg_catalog.setval('public.wallet_id_seq', 17, true);
 
 
 --
