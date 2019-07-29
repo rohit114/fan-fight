@@ -119,7 +119,7 @@ async function BonusBucketWalletTxn(payableAmount, wallet, exits){
   try {
 
     var remainingBounsAmount = 0;
-    const usableBonusAmount = (0.1)*payableAmount;  //only 20% is usable from bonus bucket
+    const usableBonusAmount = (0.1)*payableAmount;  //only 10% is usable from bonus bucket
     if( wallet.bonus >= usableBonusAmount){
       payableAmount -= usableBonusAmount;
       remainingBounsAmount = wallet.bonus - usableBonusAmount;
