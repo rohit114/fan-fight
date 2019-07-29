@@ -55,7 +55,7 @@ For LINUX https://www.digitalocean.com/community/tutorials/how-to-install-and-us
     Problem Statement:
     API that takes the input variable as discounting %age for contest
     entry fee and discounts for the user and when user joins the contest after getting discount it
-    deducts the money with above logic from user’s wallet
+    deducts the money with  logic (refer problem statement pdf) from user’s wallet
 
     route: `contest/join`
     method: POST
